@@ -5,7 +5,7 @@ You could have saved yourself a lot of your productive time if you had not reach
 In the long run, you are less likely to have issues with your computer (desktop/laptop) than with your phone, and in worst-case, you are also more likely to lose your phone than to lose your computer. In situations where you really need to login quickly, having an authenticator on your computer, or on an additional device, can make a huge difference. 
 
 
-OTP is quite simple to use. When setting up 2FA, instead of scanning the barcode, click “enter the code manually”, and use OTP. Enter the code that you seen on your screen as a secret key, as shown in the example given below. 
+OTP is quite simple to use. When setting up 2FA, instead of scanning the barcode, click “enter the code manually”, and use OTP. Enter the code that you see on your screen, as a secret key, as shown in the example given below. 
 
 
 ### To add a new provider and a secret key:
