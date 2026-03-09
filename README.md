@@ -36,3 +36,9 @@ Example:
 otp github
 ```
 
+Output:
+
+```
+729266 // Six-digit Time-based one-time password
+```
+
