@@ -1,11 +1,29 @@
-You are trying to log in, and the website that you are trying to log in, asks you for your 6-digit one-time password. So, you grab your phone, open up your authenticator app to get your code, and sadly end up scrolling. Again. 
 
-You could have saved yourself a lot of your productive time if you had not reached out for your phone; OTP solves this for you by providing you an authenticator on your terminal. 
+You're trying to log in, and the website asks for your 6-digit one-time password. So you grab your phone, open your authenticator app — and end up scrolling. Again.
 
-In the long run, you are less likely to have issues with your computer (desktop/laptop) than with your phone, and in worst-case, you are also more likely to lose your phone than to lose your computer. In situations where you really need to login quickly, having an authenticator on your computer, or on an additional device, can make a huge difference. 
+OTP solves this by bringing your authenticator to the terminal. No phone needed.
 
+In the long run, your computer is less likely to fail you than your phone, and in a pinch, having an authenticator on an additional device can make all the difference.
 
-OTP is quite simple to use. When setting up 2FA, instead of scanning the barcode, click “enter the code manually”, and use OTP. Enter the code that you see on your screen, as a secret key, as shown in the example given below. 
+## Getting started
+
+Install with:
+
+```
+go install github.com/CoderParth/otp@latest
+```
+
+Then make sure your Go bin directory is on your PATH. Add this to your shell config (~/.bashrc, ~/.zshrc, etc.):
+```bash
+export PATH=$PATH:$(go env GOPATH)/bin
+```
+
+Reload it:
+```bash
+source ~/.zshrc  # or ~/.bashrc
+```
+
+OTP is simple to use. When setting up 2FA, instead of scanning the QR code, click "enter the code manually" — then use that secret key with OTP, as shown in the example below.
 
 
 ### To add a new provider and a secret key:
@@ -41,4 +59,5 @@ Output:
 ```
 729266 // Six-digit Time-based one-time password
 ```
+
 
