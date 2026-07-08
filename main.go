@@ -8,6 +8,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	"github.com/zalando/go-keyring"
@@ -95,7 +96,7 @@ func addProviderAndSecret() {
 		`)
 	}
 	provider := flag.Args()[0]
-	secret := flag.Args()[1]
+	secret := strings.ToUpper(strings.Join(flag.Args()[1:], ""))
 	setSecret(provider, secret)
 }
 
@@ -163,7 +164,7 @@ func genToken(secret string) int {
 }
 
 func decode(secret string) []byte {
-	d, err := base32.StdEncoding.DecodeString(secret)
+	d, err := base32.StdEncoding.WithPadding(base32.NoPadding).DecodeString(secret)
 	if err != nil {
 		log.Fatal(err)
 	}
