@@ -2,7 +2,6 @@ package main
 
 import (
 	"crypto/hmac"
-	"crypto/rand"
 	"crypto/sha1"
 	"encoding/base32"
 	"encoding/binary"
@@ -181,21 +180,4 @@ func getCounterBytes() []byte {
 	// Write the counterValue into they byte array — counterBytes.
 	binary.BigEndian.PutUint64(counterBytes, uint64(counterValue))
 	return counterBytes
-}
-
-// genSecretKey generates a secure TOTP secret key of 16 characters.
-func genSecretKey() string {
-	b := genRandBytes(10) // 10 bytes.
-	// Encode into Base32
-	return base32.StdEncoding.EncodeToString(b)
-}
-
-// genRandBytes generates cryptographically secure n random bytes
-func genRandBytes(n int) []byte {
-	b := make([]byte, n)
-	_, err := rand.Read(b)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return b
 }
