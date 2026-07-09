@@ -37,8 +37,11 @@ Example:
 otp -add github JBSWY3DPEHPK3PXP
 ```
 
-***After completing the above process, feel free to set it up on your mobile phone as well.***
+***After completing the above process, feel free to set it up on your mobile phone/other devices as well.***
 
+### For Github 2FA on Multiple Devices
+Follow [this discussion](https://github.com/orgs/community/discussions/60444#discussioncomment-10238015) to set up GitHub 2FA across multiple devices.
+> **PS:** Use the same secret/setup key across all devices — don't generate a new one per device.
 
 ### To get your Time-based One-time password:
 
@@ -60,4 +63,17 @@ Output:
 729266 // Six-digit Time-based one-time password
 ```
 
+### To remove your provider:
+
+Please follow the format below:
+
+```
+otp -rm <provider> 
+```
+
+Example:
+
+```
+otp -rm github
+```
 
