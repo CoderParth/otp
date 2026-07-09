@@ -44,27 +44,28 @@ func main() {
 
 func printHelpText() {
 	text := `
-	- To add a new provider and a secret key:
+----------------------------------------------
+- To add a new provider and a secret key:
+Please follow the format below:
+otp -add <provider> <secret-key>
 
-		Please follow the format below:
-		otp -add <provider> <secret-key>
+Example:
+otp -add github JBSWY3DPEHPK3PXP
+----------------------------------------------
+- To get your Time-based One-time password:
+Please follow the format below:
+otp <provider> 
 
-		Example:
-		otp -add github JBSWY3DPEHPK3PXP
+Example:
+otp github
+----------------------------------------------
+- To remove your Provider and its secret key:
+Please follow the format below:
+otp -rm <provider> 
 
-	- To get your Time-based One-time password:
-		Please follow the format below:
-		otp <provider> 
-
-		Example:
-		otp github
-
-	- To remove your Provider and its secret key:
-		Please follow the format below:
-		otp -rm <provider> 
-
-		Example:
-		otp -rm github 
+Example:
+otp -rm github 
+----------------------------------------------
 `
 	fmt.Println(text)
 }
@@ -72,18 +73,17 @@ func printHelpText() {
 func getSecretToken() int {
 	if len(flag.Args()) < 1 {
 		log.Fatal(`
-			The name of a provider is missing. 
+The name of a provider is missing. 
 
-			Please follow the format below:
-			otp <provider> 
+Please follow the format below:
+otp <provider> 
 
-			Example:
-			otp github
+Example:
+otp github
 
-			For more info: 
-			otp -help
-
-		`)
+For more info: 
+otp -help
+`)
 	}
 	provider := flag.Args()[0]
 	secret := getSecret(provider)
@@ -93,19 +93,16 @@ func getSecretToken() int {
 func addProviderAndSecret() {
 	if len(flag.Args()) < 2 {
 		log.Fatal(`
-			Either the name of a provider or a secret key is missing. 
+Either the name of a provider or a secret key is missing. 
 
-			Please follow the format below:
-			otp -add <provider> <secret-key>
+Please follow the format below:
+otp -add <provider> <secret-key>
 
-			Example:
-			otp -add github JBSWY3DPEHPK3PXP
+Example:
+otp -add github JBSWY3DPEHPK3PXP
 
-
-			For more info: 
-			otp -help
-
-		`)
+For more info: 
+otp -help`)
 	}
 	provider := flag.Args()[0]
 	secret := strings.ToUpper(strings.Join(flag.Args()[1:], ""))
@@ -126,15 +123,13 @@ func getSecret(provider string) string {
 	if err != nil {
 		if err == keyring.ErrNotFound {
 			log.Fatal(`
-				Sorry, provider not found. 
-				Please make sure you have entered the correct spelling.
-				Or, add a new one, if you haven't.
+Sorry, provider not found. 
+Please make sure you have entered the correct spelling.
+Or, add a new one, if you haven't.
 
-
-				For more info: 
-			        otp -help
-
-				`)
+For more info: 
+otp -help
+`)
 		}
 	}
 	return secret
@@ -198,17 +193,17 @@ func getCounterBytes() []byte {
 func removeProviderAndSecret() {
 	if len(flag.Args()) < 1 {
 		log.Fatal(`
-			The name of a provider is missing. 
+The name of a provider is missing. 
 
-			Please follow the format below:
-			otp -rm <provider> 
+Please follow the format below:
+otp -rm <provider> 
 
-			Example:
-			otp -rm github 
+Example:
+otp -rm github 
 
-			For more info: 
-			otp -help
-		`)
+For more info: 
+otp -help
+`)
 	}
 	provider := flag.Args()[0]
 	removeSecret(provider)
