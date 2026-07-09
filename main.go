@@ -18,8 +18,9 @@ const ValidityDuration = 30
 const Service = "otp"
 
 var (
-	add  = flag.Bool("add", false, "Add a provider and a secret key.")
-	help = flag.Bool("help", false, "Get help.")
+	add    = flag.Bool("add", false, "Add a provider and a secret key.")
+	remove = flag.Bool("rm", false, "Remove a provider and its secret key.")
+	help   = flag.Bool("help", false, "Get help.")
 )
 
 func main() {
@@ -30,6 +31,10 @@ func main() {
 	}
 	if *add {
 		addProviderAndSecret()
+		return
+	}
+	if *remove {
+		removeProviderAndSecret()
 		return
 	}
 
@@ -53,6 +58,13 @@ func printHelpText() {
 
 		Example:
 		otp github
+
+	- To remove your Provider and its secret key:
+		Please follow the format below:
+		otp -rm <provider> 
+
+		Example:
+		otp -rm github 
 `
 	fmt.Println(text)
 }
@@ -181,4 +193,30 @@ func getCounterBytes() []byte {
 	// Write the counterValue into they byte array — counterBytes.
 	binary.BigEndian.PutUint64(counterBytes, uint64(counterValue))
 	return counterBytes
+}
+
+func removeProviderAndSecret() {
+	if len(flag.Args()) < 1 {
+		log.Fatal(`
+			The name of a provider is missing. 
+
+			Please follow the format below:
+			otp -rm <provider> 
+
+			Example:
+			otp -rm github 
+
+			For more info: 
+			otp -help
+		`)
+	}
+	provider := flag.Args()[0]
+	removeSecret(provider)
+}
+
+func removeSecret(provider string) {
+	err := keyring.Delete(Service, provider)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
